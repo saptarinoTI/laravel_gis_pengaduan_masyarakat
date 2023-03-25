@@ -2,6 +2,17 @@
 @section('title', 'Data Laporan Pengaduan')
 @section('content')
 <div class="card-style mb-30">
+    @if (auth()->user()->akse != 'masyarakat')
+    <div class="mb-4 d-flex justify-content-end">
+        <form action="{{ route('generate-report') }}" method="post" class="d-inline-flex gap-3 align-items-center">
+            @csrf
+            <label>Dari tanggal : </label>
+            <input type="date" name="tanggal" class="px-3 border rounded py-2" required />
+            <button type="submit" class="btn btn-sm text-sm btn-primary py-2">Generate Laporan</button>
+        </form>
+    </div>
+    @endif
+
     @if(Session::has('success'))
     <div class="alert alert-success text-sm">
         {{Session::get('success')}}

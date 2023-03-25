@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GenerateReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifController;
+use App\Models\Pengaduan;
+use App\Models\Tanggapan;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +24,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $complaint = Pengaduan::get();
+    $response = Tanggapan::get();
+    $user = User::where('akses', 'masyarakat')->get();
+    return view('index', compact('complaint', 'response', 'user'));
 });
 
 require __DIR__ . '/auth.php';
@@ -61,6 +68,12 @@ Route::middleware(['auth', 'checkRole:admin,petugas,pimpinan,masyarakat'])->grou
     // Tanggapan
     Route::get('response', [ResponseController::class, 'index'])->name('response.index');
     Route::get('response/{response}', [ResponseController::class, 'show'])->name('response.show');
+    // Buat Laporan
+    Route::post('generate-report', GenerateReportController::class)->name('generate-report');
+    Route::get('generate/report', function () {
+        $reports = Tanggapan::get();
+        return view('report.index', compact('reports'));
+    });
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

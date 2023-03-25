@@ -25,7 +25,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="profile">
                             <li>
-                                <a href="#0"> <i class="lni lni-cog"></i>
+                                <a href="{{ route('profile.edit') }}"> <i class="lni lni-cog"></i>
                                     Settings
                                 </a>
                             </li>
