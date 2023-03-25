@@ -11,3 +11,8 @@
 <link rel="stylesheet" href="{{ asset('assets/css/fullcalendar.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+<style>
+    input:read-only {
+        background-color: #eaeaea;
+    }
+</style>

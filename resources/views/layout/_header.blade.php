@@ -18,7 +18,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="profile-info">
                                 <div class="info">
-                                    <h6 class="small">{{ ucwords(Auth::user()->name) }}</h6>
+                                    <h6 class="small">{{ ucwords(auth()->user()->name) }}</h6>
                                 </div>
                             </div>
                             <i class="lni lni-chevron-down"></i>
@@ -31,6 +31,7 @@
                             </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="post">
+                                    @csrf
                                     <button type="submit" class="text-danger small border-none bg-transparent border-0"
                                         style="width: 100%; font-size: 14px; display: flex; align-items: center; gap: 10px">
                                         <i class="lni lni-exit"></i> Sign Out

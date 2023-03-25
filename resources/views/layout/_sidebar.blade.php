@@ -23,6 +23,8 @@
                 <hr />
             </span>
 
+            {{-- Akses Admin --}}
+            @if (auth()->user()->akses == 'admin')
             <li class="nav-item {{ (Request::is('users') || Request::is('users/*') ? 'active' : '') }}">
                 <a href="{{ route('users.index') }}">
                     <span class="icon">
@@ -35,8 +37,8 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="#">
+            <li class="nav-item {{ (Request::is('complaint') || Request::is('complaint/*') ? 'active' : '') }}">
+                <a href="{{ route('complaint.index') }}">
                     <span class="icon">
                         <svg width="22" height="22" viewBox="0 0 22 22">
                             <path
@@ -47,9 +49,12 @@
                     <span class="text">Data Laporan</span>
                 </a>
             </li>
+            @endif
 
-            <li class="nav-item">
-                <a href="#">
+            @if (auth()->user()->akses == 'admin' || auth()->user()->akses == 'petugas' || auth()->user()->akses ==
+            'pimpinan')
+            <li class="nav-item {{ (Request::is('verif') || Request::is('verif/*') ? 'active' : '') }}">
+                <a href="{{ route('verif.index') }}">
                     <span class="icon">
                         <svg width="22" height="22" viewBox="0 0 22 22">
                             <path
@@ -61,8 +66,8 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="#">
+            <li class="nav-item {{ (Request::is('response') || Request::is('response/*') ? 'active' : '') }}">
+                <a href="{{ route('response.index') }}">
                     <span class="icon">
                         <svg width="22" height="22" viewBox="0 0 22 22">
                             <path
@@ -73,6 +78,49 @@
                     <span class="text">Data Tanggapan</span>
                 </a>
             </li>
+            @endif
+
+            {{-- Akses Masyarakat --}}
+            @if (auth()->user()->akses == 'masyarakat')
+            <li class="nav-item {{ (Request::is('complaint/create') ? 'active' : '') }}">
+                <a href="{{ route('complaint.create') }}">
+                    <span class="icon">
+                        <svg width="22" height="22" viewBox="0 0 22 22">
+                            <path
+                                d="M23 18H20V15H18V18H15V20H18V23H20V20H23M6 2C4.89 2 4 2.9 4 4V20C4 21.11 4.89 22 6 22H13.81C13.45 21.38 13.2 20.7 13.08 20H6V4H13V9H18V13.08C18.33 13.03 18.67 13 19 13C19.34 13 19.67 13.03 20 13.08V8L14 2M8 12V14H16V12M8 16V18H13V16Z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="text">Buat Laporan</span>
+                </a>
+            </li>
+
+            <li class="nav-item {{ (Request::is('complaint')  ? 'active' : '') }}">
+                <a href="{{ route('complaint.index') }}">
+                    <span class="icon">
+                        <svg width="22" height="22" viewBox="0 0 22 22">
+                            <path
+                                d="M6,2A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6M6,4H13V9H18V20H6V4M8,12V14H16V12H8M8,16V18H13V16H8Z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="text">Laporan</span>
+                </a>
+            </li>
+
+            <li class="nav-item {{ (Request::is('response') || Request::is('response/*') ? 'active' : '') }}">
+                <a href="{{ route('response.index') }}">
+                    <span class="icon">
+                        <svg width="22" height="22" viewBox="0 0 22 22">
+                            <path
+                                d="M6,2A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6M6,4H13V9H18V20H6V4M8,12V14H16V12H8M8,16V18H13V16H8Z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="text">Tanggapan</span>
+                </a>
+            </li>
+            @endif
 
         </ul>
     </nav>
